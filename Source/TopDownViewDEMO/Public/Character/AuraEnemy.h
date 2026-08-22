@@ -18,4 +18,7 @@ class TOPDOWNVIEWDEMO_API AAuraEnemy : public AAuraCharacterBase, public IEnemyI
 public:
 	virtual void HightlightActor() override;
 	virtual void UnHighlightActor() override;
+	
+	UPROPERTY(BlueprintReadOnly)
+	bool bHighlighted = false;
 };
