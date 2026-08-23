@@ -22,11 +22,11 @@ void AAuraPlayerController::Tick(float DeltaSeconds)
 void AAuraPlayerController::CursorTrace()
 {
 	FHitResult CursorHit;
-	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);//从鼠标光标的位置向游戏世界检测，看鼠标指着什么
 	if (!CursorHit.bBlockingHit) return;
 	
 	LastActor = ThisActor;
-	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
+	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());//判断集中对象是否实现IEnemyInterface接口
 	
 	/*
 	 * 从光标处绘制线条 有这几种情况
@@ -40,32 +40,32 @@ void AAuraPlayerController::CursorTrace()
 	{
 		if (ThisActor != nullptr)
 		{
-			//2.
+			//2.如果上一个角色为空 但当前角色有效 那么突出显示当前角色
 			ThisActor->HightlightActor();
 		}
 		else
 		{
-			//1.
+			//1.如果上一个角色为空 且当前角色也为空 那么不执行任何操作
 		}
 	}
 	else //上一个角色是有效的
 	{
 		if (ThisActor == nullptr)
 		{
-			//3.
+			//3.如果上一个角色有效 但是当前角色为空 那么取消上一个角色的高亮显示
 			LastActor->UnHighlightActor();
 		}
 		else//两者都有效
 		{
 			if (LastActor != ThisActor)
 			{
-				//4.
+				//4.如果当前角色和上一个角色都有效 并且当前角色不等于上一个角色 那么这取消显示上个一角色高亮
 				LastActor->UnHighlightActor();
 				ThisActor->HightlightActor();
 			}
 			else
 			{
-				//5.
+				//5.当前角色和上一个角色都是有效的 则什么都不做
 			}
 		}
 	}
