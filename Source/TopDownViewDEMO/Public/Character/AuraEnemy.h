@@ -17,6 +17,12 @@ class TOPDOWNVIEWDEMO_API AAuraEnemy : public AAuraCharacterBase, public IEnemyI
 	
 public:
 	AAuraEnemy();
+	
+	/** Enemy Interface */
 	virtual void HightlightActor() override;
 	virtual void UnHighlightActor() override;
+	/**End Enemy Interface */
+	
+protected:
+	virtual void BeginPlay() override;
 };

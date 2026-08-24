@@ -23,8 +23,8 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 protected:
 	UPROPERTY()
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;//角色能力系统组件
 	
 	UPROPERTY()
-	TObjectPtr<UAttributeSet> AttributeSet;
+	TObjectPtr<UAttributeSet> AttributeSet;//角色属性集
 };
