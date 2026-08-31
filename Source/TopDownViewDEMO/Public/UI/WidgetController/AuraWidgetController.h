@@ -3,17 +3,48 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystemComponent.h"
 #include "UObject/Object.h"
 #include "AuraWidgetController.generated.h"
 
+class UAttributeSet;
+class UAbilitySystemComponent;
+
+//这个参数结构体是专门把 WidgetController 需要的东西打包起来的
+USTRUCT(BlueprintType)
+struct FWidgetControllerParams
+{
+	GENERATED_BODY()
+	
+	FWidgetControllerParams() {}
+	FWidgetControllerParams(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
+	: PlayerController(PC), PlayerState(PS), AbilitySystemComponent(ASC), AttributeSet(AS) {}
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<APlayerController> PlayerController = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<APlayerState> PlayerState = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UAttributeSet> AttributeSet = nullptr;
+	
+};
+
 /**
- * 这个UObject是用来专门 整理 和 提供 UI组件Widget的
+ * 这个UObject是用来专门 整理 和 提供 UI组件Widget的 
+ * 说白了 这个就是专门用来帮助 Widget 获取游戏数据的
  */
 UCLASS()
 class TOPDOWNVIEWDEMO_API UAuraWidgetController : public UObject
 {
 	GENERATED_BODY()
+	
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 	
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
