@@ -7,7 +7,7 @@
 #include "AuraUserWidget.generated.h"
 
 /**
- * 
+ * 这个是 Widget 的基类 如 WBP_Overlay 是它的子类
  */
 UCLASS()
 class TOPDOWNVIEWDEMO_API UAuraUserWidget : public UUserWidget

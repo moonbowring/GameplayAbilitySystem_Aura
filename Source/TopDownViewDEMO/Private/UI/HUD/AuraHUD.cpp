@@ -20,6 +20,7 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 
 void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
+	//判断蓝图的这两个加了没有
 	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class"));
 	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Class"));
 	

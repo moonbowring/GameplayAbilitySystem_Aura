@@ -13,7 +13,7 @@ class UOverlayWidgetController;
 struct FWidgetControllerParams;	
 
 /*
- * HUD指的是游戏过程中屏幕上覆盖的状态和信息
+ * HUD指的是游戏过程中屏幕上覆盖的状态和信息 可以理解为UI的总管
  * HUD的目的 是通知玩家当前游戏状态，即比分、生命值、剩余时间，等等
  * HUD通常是非交互式的，玩家不会点击HUD中的元素
  */

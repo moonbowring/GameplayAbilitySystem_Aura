@@ -37,6 +37,6 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 	
 	void CursorTrace();//光标的轨迹 鼠标悬停选敌系统
-	IEnemyInterface* LastActor;//光标上一帧指向的Actor
+	IEnemyInterface*  LastActor;//光标上一帧指向的Actor
 	IEnemyInterface* ThisActor;//光标这一阵指向的Actor
 };
