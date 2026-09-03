@@ -7,6 +7,13 @@
 #include "OverlayWidgetController.generated.h"
 
 //通过广播事件 实现对角色生命值 HP 的变化监听 利用该广播 通知所有绑定到该事件的监听者 可以实现血量变化的UI显示或者播放音效等
+/*
+ * 举个例子来说 当生命值发生变化时
+ * AttributeSet 负责保存 Health = 75.f;
+ * OverlayWidgetController 负责广播
+ * OverlayWidget 负责显示
+ * 那么这么说 游戏UI的控制流程就是 AbilitySystem->AttributeSet(Health MaxHealth)->WidgetController->Broadcast->Blueprint->Widget->UI
+ */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature, float, NewMaxHealth);
 
@@ -19,9 +26,10 @@ class TOPDOWNVIEWDEMO_API UOverlayWidgetController : public UAuraWidgetControlle
 	GENERATED_BODY()
 	
 public:
+	//通过广播来初始化角色HUD的函数
 	virtual void BroadcastInitialValues() override;
 	
-	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")//BlueprintAssignable 允许蓝图对于这个添加监听
 	FOnHealthChangedSignature OnHealthChanged;
 	
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
