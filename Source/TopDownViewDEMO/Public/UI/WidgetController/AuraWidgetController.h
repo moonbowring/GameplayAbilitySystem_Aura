@@ -46,6 +46,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 	virtual void BroadcastInitialValues();
+	virtual void BindCallbacksToDependencies();
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
 	TObjectPtr<APlayerController> PlayerController;//这个界面控制器知道当前玩家控制器是谁

@@ -6,6 +6,7 @@
 #include "UI/WidgetController/AuraWidgetController.h"
 #include "OverlayWidgetController.generated.h"
 
+struct FOnAttributeChangeData;
 //通过广播事件 实现对角色生命值 HP 的变化监听 利用该广播 通知所有绑定到该事件的监听者 可以实现血量变化的UI显示或者播放音效等
 /*
  * 举个例子来说 当生命值发生变化时
@@ -16,6 +17,8 @@
  */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature, float, NewMaxHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature, float, NewMana);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature, float, NewMaxMana);
 
 /**
  * 这个是专门负责主界面
@@ -29,9 +32,24 @@ public:
 	//通过广播来初始化角色HUD的函数
 	virtual void BroadcastInitialValues() override;
 	
+	//绑定回调函数依赖的数据来源 我要去监听AbilitySystemComponent中的 Health 和 MaxHealth 的变化
+	virtual void BindCallbacksToDependencies() override;
+	
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")//BlueprintAssignable 允许蓝图对于这个添加监听
 	FOnHealthChangedSignature OnHealthChanged;
 	
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnMaxHealthChangedSignature OnMaxHealthChanged;
+	
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
+	FOnManaChangedSignature OnManaChanged;
+	
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
+	FOnMaxManaChangedSignature OnMaxManaChanged;
+	
+protected:
+	void HealthChanged(const FOnAttributeChangeData& Data) const;
+	void MaxHealthChanged(const FOnAttributeChangeData& Data) const;
+	void ManaChanged(const FOnAttributeChangeData& Data) const;
+	void MaxManaChanged(const FOnAttributeChangeData& Data) const;
 };
