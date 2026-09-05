@@ -10,7 +10,8 @@ void UOverlayWidgetController::BroadcastInitialValues()
 	//获取到具体玩家的属性设置
 	const UAuraAttributeSet* AuraAttributeSet = CastChecked<UAuraAttributeSet>(AttributeSet);
 	
-	OnHealthChanged.Broadcast(AuraAttributeSet->GetHealth());//从AttributeSet读取到当前Health 然后广播出去
+	//这是通过广播初始化玩家数值
+	OnHealthChanged.Broadcast(AuraAttributeSet->GetHealth());//当 Health 发生改变时 从AttributeSet读取到当前Health 然后广播出去
 	OnMaxHealthChanged.Broadcast(AuraAttributeSet->GetMaxHealth());
 	
 	OnManaChanged.Broadcast(AuraAttributeSet->GetMana());
