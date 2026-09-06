@@ -19,8 +19,8 @@ protected:
 	
 	//把指定的 Gameplay Effect 应用到指定的 Target 身上   Target:效果要作用到谁   GameplayEffectClass:要施加什么 Gameplay Effect
 	UFUNCTION(BlueprintCallable)
-	void ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass);
+	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 	
-	UPROPERTY(EditAnywhere, Category = "Applied Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
 };
